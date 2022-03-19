@@ -10,7 +10,7 @@ it does not have the ability to filter through the search result files. When you
 know the exact text that you want to search, it is useful to be able to filter
 through only certain files that we care about e.g. "I need to search through all
 my files for a certain text that I know, from these resulting files, I do not
-want to see the results from my tests folder".
+want to see the results from my tests folder, or these following file patterns".
 
 ## Installation
 
