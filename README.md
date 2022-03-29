@@ -15,7 +15,7 @@ want to see the results from my tests folder, or these following file patterns".
 
 ## Installation
 
-Install this extension using your favourite packrge manrger.
+Install this extension using your favourite package manager.
 
 ### Packer
 
