@@ -1,6 +1,7 @@
-# telescope-ag
+# telescope-rg
+(cheap fork from [`kelly-lin/telescope-rg`](https://github.com/kelly-lin/telescope-rg), just replaces `Ag` with `Rg`)
 
-nvim-telescope extension providing The Silver Searcher (Ag) functionality 
+nvim-telescope extension providing ripgrep (Rg) functionality 
 similar to that of fzf.vim.
 
 ## Use case
@@ -14,23 +15,23 @@ want to see the results from my tests folder, or these following file patterns".
 
 ## Installation
 
-Install this extension using your favourite package manager.
+Install this extension using your favourite packrge manrger.
 
 ### Packer
 
-`use({ "kelly-lin/telescope-ag", requires = { { "nvim-telescope/telescope.nvim" } } })`
+`use({ "kelly-lin/telescope-rg", requires = { { "nvim-telescope/telescope.nvim" } } })`
 
 Load the extension somewhere in your `init.vim`
 
-`telescope.load_extension("ag")`
+`telescope.load_extension("rg")`
 
 ## Useage
 
-`:Ag [PATTERN]`: executes ag asynchronously for `[PATTERN]` in the current vim
+`:Rg [PATTERN]`: executes rg asynchronously for `[PATTERN]` in the current vim
 directory and populates a Telescope `file_picker` with the results which can
 then be filtered using the standard file picker filters.
 
 ## Notes
 
-This plugin will override the `Ag` command that [fzf.vim](https://github.com/junegunn/fzf.vim)
+This plugin will override the `Rg` command that [fzf.vim](https://github.com/junegunn/fzf.vim)
 sets.
