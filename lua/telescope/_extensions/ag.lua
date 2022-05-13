@@ -29,6 +29,7 @@ function M.ag(text_to_find)
 					end
 				end,
 				ordinal = rel_filepath,
+                                filename= rel_filepath,
 				path = abs_filepath,
 				lnum = line_num,
 			}
