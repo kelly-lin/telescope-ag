@@ -16,6 +16,10 @@ want to see the results from my tests folder, or these following file patterns".
 
 Install this extension using your favourite package manager.
 
+### Dependencies
+
+* [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
+
 ### Packer
 
 `use({ "kelly-lin/telescope-ag", requires = { { "nvim-telescope/telescope.nvim" } } })`
