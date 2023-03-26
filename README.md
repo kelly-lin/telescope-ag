@@ -57,7 +57,8 @@ Load the extension somewhere in your `init.vim`
 
 To change the command used to execute the search, invoke `telescope_ag.setup`
 with a table with a `cmd` key which is a `table` of command line arguments as
-strings. This plugin has built-in support for searchers in `telescope_ag.cmds`.
+strings. You can use built-in searcher commands defined in `telescope_ag.cmds`
+or write your own custom command.
 
 ##### Built-in
 
