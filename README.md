@@ -1,4 +1,4 @@
-# telescope-ag
+# telescope-ag (Any Grep)
 
 nvim-telescope extension to filter file results from grep-like programs
 (grep/rg/ag). The workflow for searching and filtering files is similar to
