@@ -7,21 +7,21 @@ local utils = require("telescope.utils")
 
 local M = {}
 
-function M.ag(text_to_find)
-	local default_opts = {
+---Execute picker search with `pattern`.
+---@param pattern string pattern to search with configured cmd.
+function M.ag(pattern)
+	local opts = {
 		entry_maker = function(entry)
-			local split = vim.split(entry, ":")
-			local rel_filepath = split[1]
-			local abs_filepath = vim.fn.getcwd() .. "/" .. rel_filepath
-			local line_num = tonumber(split[2])
+			local entry_components = vim.split(entry, ":")
+			local rel_filepath = entry_components[1]
 			return {
 				value = entry,
 				display = function(display_entry)
-					local hl_group
-					local display = utils.transform_path({}, display_entry.value)
-
-					display, hl_group = utils.transform_devicons(display_entry.path, display, false)
-
+					local display, hl_group = utils.transform_devicons(
+						display_entry.path,
+						utils.transform_path({}, display_entry.value),
+						false
+					)
 					if hl_group then
 						return display, { { { 1, 3 }, hl_group } }
 					else
@@ -29,9 +29,9 @@ function M.ag(text_to_find)
 					end
 				end,
 				ordinal = rel_filepath,
-                                filename = rel_filepath,
-				path = abs_filepath,
-				lnum = line_num,
+				filename = rel_filepath,
+				path = vim.loop.fs_realpath(rel_filepath),
+				lnum = tonumber(entry_components[2]),
 			}
 		end,
 		attach_mappings = function(prompt_bufnr)
@@ -43,15 +43,17 @@ function M.ag(text_to_find)
 			return true
 		end,
 	}
-	local opts = default_opts
 
-	local args = { "ag", text_to_find }
-	pickers.new(opts, {
-		prompt_title = "Silver Searcher",
-		finder = finders.new_oneshot_job(args, opts),
-		previewer = conf.grep_previewer(opts),
-		sorter = conf.file_sorter(opts),
-	}):find()
+	local cmd = require("telescope-ag")._get_opts().cmd
+	table.insert(cmd, pattern)
+	pickers
+		.new(opts, {
+			prompt_title = "Any Grep - " .. cmd[1],
+			finder = finders.new_oneshot_job(cmd, opts),
+			previewer = conf.grep_previewer(opts),
+			sorter = conf.file_sorter(opts),
+		})
+		:find()
 end
 
 return require("telescope").register_extension({

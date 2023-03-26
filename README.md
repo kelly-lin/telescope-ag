@@ -1,7 +1,13 @@
 # telescope-ag
 
-nvim-telescope extension providing The Silver Searcher (Ag) functionality 
-similar to that of fzf.vim.
+nvim-telescope extension to filter file results from grep-like programs
+(grep/rg/ag). The workflow for searching and filtering files is similar to
+[fzf.vim](https://github.com/junegunn/fzf.vim).
+
+By default `ag` [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
+will be used to execute the searches. This can be configured to run any program
+which returns search results formatted similar to grep and friends, see
+[configuration](#configuration).
 
 ## Use case
 
@@ -18,17 +24,68 @@ Install this extension using your favourite package manager.
 
 ### Dependencies
 
+* [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 * [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
 
-### Packer
+Lazy
 
-`use({ "kelly-lin/telescope-ag", requires = { { "nvim-telescope/telescope.nvim" } } })`
+```lua
+{
+    "kelly-lin/telescope-ag",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    end,
+}
+```
+
+Packer
+
+```lua
+use({
+    "kelly-lin/telescope-ag",
+    requires = { "nvim-telescope/telescope.nvim" },
+    end,
+})(
+```
 
 Load the extension somewhere in your `init.vim`
 
 `telescope.load_extension("ag")`
 
-## Useage
+### Configuration
+
+#### Search Command
+
+To change the command used to execute the search, invoke `telescope_ag.setup`
+with a table with a `cmd` key which is a `table` of command line arguments as
+strings. This plugin has built-in support for searchers in `telescope_ag.cmds`.
+
+##### Built-in
+
+```lua
+{
+    config = function()
+        local telescope_ag = require("telescope-ag")
+        telescope_ag.setup({
+            cmd = telescope_ag.cmds.rg, -- defaults to telescope_ag.cmds.ag
+        })
+    end
+}
+```
+
+##### Custom
+
+```lua
+{
+    config = function()
+        local telescope_ag = require("telescope-ag")
+        telescope_ag.setup({
+            cmd = { "grep", "-rn" }
+        })
+    end
+}
+```
+
+## Usage
 
 `:Ag [PATTERN]`: executes ag asynchronously for `[PATTERN]` in the current vim
 directory and populates a Telescope `file_picker` with the results which can
