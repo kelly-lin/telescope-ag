@@ -33,7 +33,6 @@ Lazy
 {
     "kelly-lin/telescope-ag",
     dependencies = { "nvim-telescope/telescope.nvim" },
-    end,
 }
 ```
 
@@ -43,8 +42,7 @@ Packer
 use({
     "kelly-lin/telescope-ag",
     requires = { "nvim-telescope/telescope.nvim" },
-    end,
-})(
+})
 ```
 
 Load the extension somewhere in your `init.vim`
